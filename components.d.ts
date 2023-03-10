@@ -9,11 +9,17 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Area: typeof import('./src/components/basic/area.vue')['default']
     Basic: typeof import('./src/components/basic/index.vue')['default']
+    Core: typeof import('./src/components/core/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElMain: typeof import('element-plus/es')['ElMain']
+    ElTabPane: typeof import('element-plus/es')['ElTabPane']
+    ElTabs: typeof import('element-plus/es')['ElTabs']
+    Floor: typeof import('./src/components/basic/floor.vue')['default']
+    FloorArea: typeof import('./src/components/basic/floorArea.vue')['default']
     Login: typeof import('./src/components/core/login.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
