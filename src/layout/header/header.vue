@@ -8,7 +8,7 @@
             <div class="authBar">
                 <ul class="authNav">
                     <li><el-button plain circle size="large" color="#9d1d22">背景</el-button></li>
-                    <li><el-button plain size="large" color="#9d1d22">登录</el-button></li>
+                    <li><el-button plain size="large" color="#9d1d22" @click="toLogin">登录</el-button></li>
                     <li><el-button text size="large">我的预约信息</el-button></li>
                     <li><el-button size="large" color="#9d1d22">还有座位吗?</el-button></li>
                 </ul>
@@ -17,7 +17,11 @@
     </el-header>
 </template>
 <script setup lang='ts'>
-import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed } from 'vue';
+import { ref, reactive } from 'vue';
+import router from '../../router';
+const toLogin = () => {
+    router.push('/login')
+}
 </script>
 <style scoped lang='less'>
 .header {

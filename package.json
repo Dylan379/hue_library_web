@@ -16,10 +16,12 @@
     "element-plus": "^2.2.34",
     "moment": "^2.29.4",
     "pinia": "^2.0.33",
+    "unplugin-icons": "^0.15.3",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "autoprefixer": "^10.4.13",
     "less": "^4.1.3",
