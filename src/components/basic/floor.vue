@@ -33,7 +33,7 @@ const change = (e: Event) => {
     display: flex;
     flex-direction: column;
     margin-top: 19vh;
-    width: 42px;
+    width: 40px;
     z-index: 1;
 
     button {
@@ -53,7 +53,6 @@ const change = (e: Event) => {
     .first {
         border-radius: 0 0 5px 5px;
         border-bottom: 1px solid #e4e7ed;
-        // background-color: #9e1a26;
     }
 }
 </style>

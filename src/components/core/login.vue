@@ -10,25 +10,37 @@
       </div>
       <div>
         <div class='flex justify-center mb-5'>
-          <div @click="loginWay = pwdLogin" class='text-xl' :class="[loginWay == pwdLogin ? 'choseLogin' : 'notChose']">
+          <div @click="loginWay = pwdLogin; toRegist = !toRegist" class='text-xl'
+            :class="[loginWay == pwdLogin ? 'choseLogin' : 'notChose']">
             密码登录
           </div>
           <div class='w-0 h-7 border-solid border-r-2 border-gray-200 mx-7'></div>
-          <div @click="loginWay = phoneNumLogin" class="text-xl"
+          <div @click="loginWay = phoneNumLogin; toRegist = !toRegist" class="text-xl"
             :class="[loginWay == phoneNumLogin ? 'choseLogin' : 'notChose']">短信登录
           </div>
         </div>
         <div>
-          <component :is="loginWay" />
-          <div class='flex justify-center'>
-            <div class='flex w-56 mt-3  justify-between '>
-              <el-button plain color="#9d1d22" size='large'>注册</el-button>
-              <el-button color="#9d1d22" size='large'>登录</el-button>
+          <form action="">
+            <div>
+              <div class='border-2 border-solid rounded-md border-gray-200 mx-20'>
+                <component :is="loginWay" />
+              </div>
+              <div class='flex justify-center'>
+                <div class='flex w-56 mt-3  justify-between '>
+                  <div v-if="toRegist" class='flex w-56 mt-3  justify-between'>
+                    <el-button plain color="#9d1d22" size='large'
+                      @click="toRegist = !toRegist; loginWay = phoneNumLogin">注册</el-button>
+                    <el-button color="#9d1d22" size='large'>登录</el-button>
+                  </div>
+                  <component v-else :is="loginWithRegist" />
+                </div>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
+    <!-- <RouterView name="regist" class='bg-gray-200 w-80 h-5/6 mr-60'></RouterView> -->
   </div>
 </template>
 
@@ -36,9 +48,16 @@
 import { ref, reactive, toRefs, shallowRef, onMounted, watchEffect, computed } from 'vue';
 import pwdLogin from '../basic/pwdLogin.vue'
 import phoneNumLogin from '../basic/phoneNumLogin.vue'
+import loginWithRegist from '../basic/loginWithRegist.vue'
+// import router from '../../router';
+// const toRegist = () => {
+//   router.push('/login/regist')
+// }
 let pwdLoginVue = shallowRef(pwdLogin);
 // let phoneNumLoginVue = shallowRef(phoneNumLogin)
 const loginWay = pwdLoginVue
+//控制注册跳转
+const toRegist = ref(true)
 </script>
 <style scoped lang='less'>
 .login-mask {
@@ -47,8 +66,9 @@ const loginWay = pwdLoginVue
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 3;
   background-color: rgba(0, 0, 0, 0.471);
+  display: flex;
 
   .login-close {
     display: flex;
@@ -72,8 +92,6 @@ const loginWay = pwdLoginVue
     .notChose {
       cursor: pointer;
     }
-
   }
-
 }
 </style>

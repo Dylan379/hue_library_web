@@ -11,8 +11,22 @@ const router = createRouter({
                     path: '/login',
                     components: {
                         login: () => import('../components/core/login.vue')
-                    }
+                    },
+                    // children: [
+                    //     {
+                    //         path: '/login/regist',
+                    //         components: {
+                    //             regist: () => import('../components/core/register.vue')
+                    //         }
+                    //     }
+                    // ],
                 },
+                // {
+                //     path: '/login/regist',
+                //     components: {
+                //         regist: () => import('../components/core/register.vue')
+                //     }
+                // }
             ]
         }
     ]
