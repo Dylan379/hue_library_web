@@ -34,6 +34,7 @@ declare module '@vue/runtime-core' {
     ElPopover: typeof import('element-plus/es')['ElPopover']
     ElRadio: typeof import('element-plus/es')['ElRadio']
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
+    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSelectV2: typeof import('element-plus/es')['ElSelectV2']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
@@ -57,5 +58,6 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     Seat: typeof import('./src/components/basic/seat.vue')['default']
     Table: typeof import('./src/components/basic/table.vue')['default']
+    VerticalSeat: typeof import('./src/components/basic/verticalSeat.vue')['default']
   }
 }

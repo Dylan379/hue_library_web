@@ -4,7 +4,7 @@
       <div class="floor">
         <choseFloor></choseFloor>
       </div>
-      <div class='choseTable'>
+      <div class='choseSeat'>
         <choseSeat></choseSeat>
       </div>
       <div>
@@ -40,18 +40,16 @@ const { showOtherTable } = storeToRefs(store)
     // overflow: hidden;
   }
 
-  .choseTable {
+  .choseSeat {
     display: flex;
-    margin: 20px 0 0 12vw;
-    // height: 1000px;
-    width: 58vw;
+    margin: 20px 0 0 11vw;
+    width: 59vw;
     border-radius: 10px;
     background-color: aliceblue;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.215);
   }
 
   .otherTable {
-    // display: flex;
     position: fixed;
     right: 1vw;
     margin: 20px 0 0 25px;
