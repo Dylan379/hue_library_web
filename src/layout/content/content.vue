@@ -27,7 +27,7 @@ import otherTable from '../../components/core/otherTable.vue';
 import { storeToRefs } from 'pinia'
 import { useOtherTableStore } from '../../stores/otherTable'
 const store = useOtherTableStore()
-const { showOtherTable } = storeToRefs(store)
+const showOtherTable = computed(() => store.showOtherTable)
 </script>
 <style scoped lang='less'>
 .content {

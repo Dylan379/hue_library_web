@@ -30,7 +30,7 @@
                   <div v-if="toRegist" class='flex w-56 mt-3  justify-between'>
                     <el-button plain color="#9d1d22" size='large'
                       @click="toRegist = !toRegist; loginWay = phoneNumLogin">注册</el-button>
-                    <el-button color="#9d1d22" size='large'>登录</el-button>
+                    <el-button color="#9d1d22" size='large' @click="toLogin">登录</el-button>
                   </div>
                   <component v-else :is="loginWithRegist" />
                 </div>
@@ -40,24 +40,71 @@
         </div>
       </div>
     </div>
-    <!-- <RouterView name="regist" class='bg-gray-200 w-80 h-5/6 mr-60'></RouterView> -->
   </div>
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive, toRefs, shallowRef, onMounted, watchEffect, computed } from 'vue';
+import { ref, reactive, toRefs, shallowRef, onMounted, watchEffect, computed, watch } from 'vue';
+import { ElMessage } from 'element-plus'
+import App from '../../App.vue'
 import pwdLogin from '../basic/pwdLogin.vue'
 import phoneNumLogin from '../basic/phoneNumLogin.vue'
 import loginWithRegist from '../basic/loginWithRegist.vue'
-// import router from '../../router';
-// const toRegist = () => {
-//   router.push('/login/regist')
-// }
+import { User } from '../../interface/userType'
+import { useUserStore } from '../../stores/user';
+import axios from 'axios'
+import { storeToRefs } from 'pinia';
+import router from '../../router';
+import AppVue from '../../App.vue';
+// import { Message } from '@element-plus/icons-vue/dist/types/components';
+//控制登录面板组件跳转
 let pwdLoginVue = shallowRef(pwdLogin);
-// let phoneNumLoginVue = shallowRef(phoneNumLogin)
 const loginWay = pwdLoginVue
 //控制注册跳转
 const toRegist = ref(true)
+
+//登录模块
+const userStore = useUserStore();
+const toLogin = () => {
+  axios.post('https://yapi.pro/mock/19414/api/toLogin', {
+    userName: userStore.userName,
+    userPwd: userStore.userPwd
+  })
+    .then((res) => {
+      if (res.data.msg === "200") {
+        // AppVue.$message
+        // debugger
+        ElMessage({
+          showClose: true,
+          message: 'Congrats,登陆成功.',
+          type: 'success',
+        })
+        setTimeout(() => {
+          sessionStorage.setItem('Id', "2")
+          router.push('/')
+        }, 1000)
+      } else {
+        ElMessage({
+          showClose: true,
+          message: 'Oops, 登陆失败.',
+          type: 'error',
+        })
+
+        // ElMessage.error('something went worn')
+        // Message({
+        //   message: 'Not OK',
+        //   type: 'error',
+        // })
+      }
+      console.log(res);
+
+    })
+    .catch(() => {
+
+    })
+
+}
+
 </script>
 <style scoped lang='less'>
 .login-mask {
