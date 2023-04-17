@@ -5,16 +5,23 @@ export const useUserStore = defineStore({
     state: () => {
         return {
             userName: '',
-            userPwd: ''
+            userPwd: '',
+            userPhoneNum: '',
+            captchaNum: 0
         }
     },
     getters: {
 
     },
     actions: {
-        changeUserState(userName: string, userPwd: string) {
+        changeUserInfo(userName: string, userPwd: string) {
             this.userName = userName
             this.userPwd = userPwd
+        },
+        changePhoneNum(userPhoneNum: string, captchaNum: number) {
+            this.userPhoneNum = userPhoneNum
+            this.captchaNum = captchaNum
         }
+
     }
 })

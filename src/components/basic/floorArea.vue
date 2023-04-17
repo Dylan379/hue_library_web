@@ -10,28 +10,32 @@
 <script setup lang='ts'>
 import { onMounted } from 'vue';
 import { useFloorAreaStore } from '../../stores/floorArea';
-const storeFloorArea = useFloorAreaStore()
+const areaStore = useFloorAreaStore()
 onMounted(() => {
     const container1 = document.querySelector(".floorArea");
-    const node = document.querySelector(`.districtData-item-${0}`);
-    console.log(node)
     const btn1 = container1!.querySelector('.first');
-    (btn1 as HTMLButtonElement).style.backgroundColor = '#9e1a26';
-    (btn1 as HTMLButtonElement).style.color = 'white';
+    const firstBtn = (btn1 as HTMLButtonElement);
+    firstBtn.style.backgroundColor = '#9e1a26';
+    firstBtn.style.color = 'white';
+    firstBtn.style.cursor = 'not-allowed';
+    firstBtn.disabled = true;
 })
 const change = (e: Event) => {
-    var container = document.querySelector(".floorArea");
-    var btn = container!.querySelectorAll('.floorArea > button');
-    for (var j = 0; j < btn.length; j++) {
-        (btn[j] as HTMLButtonElement).removeAttribute('disabled');
-        (btn[j] as HTMLButtonElement).style.backgroundColor = '';
-        (btn[j] as HTMLButtonElement).style.color = 'black';
+    let currentBtn = (e.target as HTMLButtonElement);
+    let container = document.querySelector(".floorArea");
+    let btn = container!.querySelectorAll('.floorArea > button');
+    for (let j = 0; j < btn.length; j++) {
+        let otherBtn = (btn[j] as HTMLButtonElement);
+        otherBtn.removeAttribute('disabled');
+        otherBtn.style.cursor = 'pointer'
+        otherBtn.style.backgroundColor = '';
+        otherBtn.style.color = 'black';
     }
-    (e.target as HTMLButtonElement).disabled = true;
-    (e.target as HTMLButtonElement).style.backgroundColor = '#9e1a26';
-    (e.target as HTMLButtonElement).style.color = 'white';
-    // console.log('district' + ((e.target as HTMLButtonElement).innerText).slice(0, 1));
-    storeFloorArea.updateFloorArea('district' + ((e.target as HTMLButtonElement).innerText).slice(0, 1))
+    currentBtn.disabled = true;
+    currentBtn.style.cursor = 'not-allowed'
+    currentBtn.style.backgroundColor = '#9e1a26';
+    currentBtn.style.color = 'white';
+    areaStore.updateFloorArea('district' + (currentBtn.innerText).slice(0, 1))
 }
 //code for function
 

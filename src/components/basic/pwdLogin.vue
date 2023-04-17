@@ -15,17 +15,14 @@
 <script setup lang='ts'>
 import { onUpdated, ref, reactive, toRefs, onBeforeUnmount, onMounted, watchEffect, computed, watch } from 'vue';
 import { useUserStore } from '../../stores/user'
-import { User } from '../../interface/userType'
-import { storeToRefs } from 'pinia';
 const userStore = useUserStore()
-let { userName, userPwd } = storeToRefs(userStore)
 let user = reactive({
     userName: '',
     userPwd: ''
 })
-
 onUpdated(() => {
-    userStore.changeUserState(user.userName, user.userPwd)
+    userStore.changeUserInfo(user.userName, user.userPwd);
 })
+
 </script>
 <style scoped lang='less'></style>

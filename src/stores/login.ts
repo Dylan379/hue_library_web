@@ -4,7 +4,9 @@ export const useLoginStore = defineStore({
     id: 'login', // id必填，且需要唯一
     state: () => {
         return {
-            showLogin: false
+            showLogin: false,
+            isRegist: true,
+            loginWay: '',
         }
     },
     getters: {

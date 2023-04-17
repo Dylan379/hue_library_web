@@ -12,8 +12,8 @@ import districtC from '../../components/core/districtC.vue';
 import districtD from '../../components/core/districtD.vue';
 import { storeToRefs } from 'pinia'
 import { useFloorAreaStore } from '../../stores/floorArea';
-const storeFloorArea = useFloorAreaStore()
-const { showFloorArea } = storeToRefs(storeFloorArea)
+const areaStore = useFloorAreaStore()
+const { showFloorArea } = storeToRefs(areaStore)
 let comID = shallowRef(districtA)
 watch(showFloorArea, () => {
   switch (showFloorArea.value) {

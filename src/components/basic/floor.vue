@@ -13,18 +13,27 @@ import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed 
 onMounted(() => {
     const container1 = document.querySelector(".floor");
     const btn1 = container1!.querySelector('.first');
-    (btn1 as HTMLButtonElement).style.backgroundColor = '#9e1a26';
-    (btn1 as HTMLButtonElement).style.color = 'white';
+    const firstBtn = (btn1 as HTMLButtonElement);
+    firstBtn.style.backgroundColor = '#9e1a26';
+    firstBtn.style.color = 'white';
+    firstBtn.style.cursor = 'not-allowed';
+    firstBtn.disabled = true;
 })
 const change = (e: Event) => {
-    var container = document.querySelector(".floor");
-    var btn = container!.querySelectorAll('.floor > button');
-    for (var j = 0; j < btn.length; j++) {
-        (btn[j] as HTMLButtonElement).style.backgroundColor = '';
-        (btn[j] as HTMLButtonElement).style.color = 'black';
+    let currentBtn = (e.target as HTMLButtonElement);
+    let container = document.querySelector(".floor");
+    let btn = container!.querySelectorAll('.floor > button');
+    for (let j = 0; j < btn.length; j++) {
+        let otherBtn = (btn[j] as HTMLButtonElement);
+        otherBtn.removeAttribute('disabled');
+        otherBtn.style.cursor = 'pointer'
+        otherBtn.style.backgroundColor = '';
+        otherBtn.style.color = 'black';
     }
-    (e.target as HTMLButtonElement).style.backgroundColor = '#9e1a26';
-    (e.target as HTMLButtonElement).style.color = 'white';
+    currentBtn.disabled = true;
+    currentBtn.style.cursor = 'not-allowed'
+    currentBtn.style.backgroundColor = '#9e1a26';
+    currentBtn.style.color = 'white';
 }
 //code for function
 </script>

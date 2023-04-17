@@ -47,6 +47,7 @@ declare module '@vue/runtime-core' {
     FloorArea: typeof import('./src/components/basic/floorArea.vue')['default']
     Login: typeof import('./src/components/core/login.vue')['default']
     LoginOrSub: typeof import('./src/components/basic/loginOrSub.vue')['default']
+    LoginWithPwd: typeof import('./src/components/basic/loginWithPwd.vue')['default']
     LoginWithRegist: typeof import('./src/components/basic/loginWithRegist.vue')['default']
     Main: typeof import('./src/components/core/main.vue')['default']
     OtherTable: typeof import('./src/components/core/otherTable.vue')['default']
