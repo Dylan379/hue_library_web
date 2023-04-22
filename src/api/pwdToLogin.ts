@@ -5,16 +5,12 @@ import router from '../router';
 //登录模块
 const userStore = useUserStore();
 export const pwdToLogin = () => {
-    //http://127.0.0.1:4523/m1/2597435-0-default/api/toLogin
-    //https://yapi.pro/mock/19414/api/toLogin
-    axios.post('http://127.0.0.1:4523/m1/2597435-0-default/api/toLogin', {
+    axios.post('/api/toLogin', {
         userName: userStore.userName,
         userPwd: userStore.userPwd
     })
         .then((res) => {
-            console.log(res);
-
-            let resMsg = res.data.msg;
+            const resMsg = res.data.msg;
             if (resMsg === "200") {
                 ElMessage({
                     showClose: true,
@@ -22,7 +18,7 @@ export const pwdToLogin = () => {
                     type: 'success',
                 })
                 setTimeout(() => {
-                    sessionStorage.setItem('Id', res.data.userId)
+                    sessionStorage.setItem('id', res.data.userId)
                     router.push('/')
                 }, 1000)
             } else if (resMsg === '201') {

@@ -12,6 +12,6 @@ import useDebounce from '../../hooks/usedebounce'
 //登录api
 const toLogin = captchaToLogin;
 //登录防抖
-const useDebounceToLogin = useDebounce(toLogin, 1050)
+const useDebounceToLogin = useDebounce(toLogin, 1500)
 </script>
 <style scoped lang='less'></style>

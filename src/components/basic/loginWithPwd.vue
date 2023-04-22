@@ -17,6 +17,6 @@ const isRegist = () => {
 //登录api
 const toLogin = pwdToLogin;
 //登录防抖
-const useDebounceToLogin = usedebounce(toLogin, 1000, false)
+const useDebounceToLogin = usedebounce(toLogin, 1500, false)
 </script>
 <style scoped lang='less'></style>

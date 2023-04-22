@@ -1,11 +1,18 @@
 <template>
   <el-main>
     <div class="content">
-      <div class="floor">
-        <choseFloor></choseFloor>
-      </div>
-      <div class='choseSeat'>
-        <choseSeat></choseSeat>
+      <div>
+        <div class="leftSide">
+          <div>
+            <choseFloor></choseFloor>
+          </div>
+          <div class="attention">
+            <attention></attention>
+          </div>
+        </div>
+        <div class='choseSeat'>
+          <choseSeat></choseSeat>
+        </div>
       </div>
       <div>
         <RouterView name="login"></RouterView>
@@ -23,8 +30,7 @@ import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed,
 import choseFloor from '../../components/core/choseFloor.vue';
 import choseSeat from '../../components/core/choseSeat.vue'
 import otherTable from '../../components/core/otherTable.vue';
-
-import { storeToRefs } from 'pinia'
+import attention from '../../components/basic/attention.vue';
 import { useOtherTableStore } from '../../stores/otherTable'
 const store = useOtherTableStore()
 const showOtherTable = computed(() => store.showOtherTable)
@@ -35,9 +41,13 @@ const showOtherTable = computed(() => store.showOtherTable)
   position: relative;
   display: flex;
 
-  .floor {
+  .leftSide {
     position: fixed;
+
     // overflow: hidden;
+    .attention {
+      margin-top: 20px;
+    }
   }
 
   .choseSeat {

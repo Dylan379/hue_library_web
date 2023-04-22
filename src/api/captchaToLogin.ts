@@ -5,7 +5,8 @@ import router from '../router';
 //验证码登录api
 const userStore = useUserStore();
 export const captchaToLogin = () => {
-    axios.post('http://127.0.0.1:4523/m1/2597435-0-default/api/captchaLogin', {
+    // http://127.0.0.1:4523/m1/2597435-0-default/api/captchaLogin
+    axios.post('/api/captchaToLogin', {
         userPhoneum: userStore.userPhoneNum,
         captcha: userStore.captchaNum
     })

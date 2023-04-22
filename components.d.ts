@@ -10,6 +10,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Area: typeof import('./src/components/basic/area.vue')['default']
+    Attention: typeof import('./src/components/basic/attention.vue')['default']
     Basic: typeof import('./src/components/basic/index.vue')['default']
     ChoseFloor: typeof import('./src/components/core/choseFloor.vue')['default']
     ChoseSeat: typeof import('./src/components/core/choseSeat.vue')['default']
@@ -50,6 +51,7 @@ declare module '@vue/runtime-core' {
     LoginWithPwd: typeof import('./src/components/basic/loginWithPwd.vue')['default']
     LoginWithRegist: typeof import('./src/components/basic/loginWithRegist.vue')['default']
     Main: typeof import('./src/components/core/main.vue')['default']
+    MyReserve: typeof import('./src/components/basic/myReserve.vue')['default']
     OtherTable: typeof import('./src/components/core/otherTable.vue')['default']
     PhoneNumLogin: typeof import('./src/components/basic/phoneNumLogin.vue')['default']
     PwdLogin: typeof import('./src/components/basic/pwdLogin.vue')['default']

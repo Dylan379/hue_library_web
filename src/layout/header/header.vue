@@ -5,21 +5,14 @@
                 <div><img class="titleLogo" src="../../assets/images/logo/titleLogo.svg" alt=""></div>
                 <h4 class="titleText">崇德尚善, 精工铸新</h4>
             </div>
+
+            <!--4月18日需 编写预约信息mock数据与接口,实现预约信息展示 -->
             <div class="authBar">
                 <ul class="authNav">
                     <li><el-button plain circle size="large" color="#9d1d22">背景</el-button></li>
                     <li><el-button plain size="large" color="#9d1d22" @click="toLogin">登录</el-button></li>
                     <li>
-                        <el-popover placement="bottom" :width="400" trigger="click" :hide-after="50">
-                            <template #reference>
-                                <el-button text size="large">我的预约信息</el-button>
-                            </template>
-                            <el-table :data="gridData">
-                                <el-table-column width="150" property="date" label="date" />
-                                <el-table-column width="100" property="name" label="name" />
-                                <el-table-column width="300" property="address" label="address" />
-                            </el-table>
-                        </el-popover>
+                        <component :is="myReserve"></component>
                     </li>
                     <li><el-button size="large" color="#9d1d22" @click="showTable">还有座位吗?</el-button></li>
                 </ul>
@@ -28,44 +21,20 @@
     </el-header>
 </template>
 <script setup lang='ts'>
-import { ref, reactive } from 'vue';
+import { ref, reactive, watch, watchEffect } from 'vue';
+import myReserve from '../../components/basic/myReserve.vue';
 import router from '../../router';
-import { storeToRefs } from 'pinia'
 import { useOtherTableStore } from '../../stores/otherTable'
+//登录
 const toLogin = () => {
     router.push('/login')
 }
+
+//还有座位吗
 const store = useOtherTableStore()
-const { showOtherTable } = storeToRefs(store)
 const showTable = () => {
     store.updateShowOtherTable();
 }
-
-const gridData = [
-    {
-        date: '2016-05-02',
-        name: 'Jack',
-        address: 'New York City',
-    },
-    {
-        date: '2016-05-04',
-        name: 'Jack',
-        address: 'New York City',
-    },
-    {
-        date: '2016-05-01',
-        name: 'Jack',
-        address: 'New York City',
-    },
-    {
-        date: '2016-05-03',
-        name: 'Jack',
-        address: 'New York City',
-    },
-]
-
-
-
 </script>
 <style scoped lang='less'>
 .header {

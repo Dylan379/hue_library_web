@@ -1,7 +1,7 @@
 <template>
     <div class="floor">
-        <floor class='shadow-lg'></floor>
-        <floorArea class='shadow-lg'></floorArea>
+        <floor></floor>
+        <floorArea></floorArea>
     </div>
 </template>
 
