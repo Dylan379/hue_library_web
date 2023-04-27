@@ -24,14 +24,14 @@
 import { ref, reactive, watch, watchEffect } from 'vue';
 import myReserve from '../../components/basic/myReserve.vue';
 import router from '../../router';
-import { useOtherTableStore } from '../../stores/otherTable'
+import { useAvailableSeatStore } from '../../stores/availableSeat'
 //登录
 const toLogin = () => {
     router.push('/login')
 }
 
 //还有座位吗
-const store = useOtherTableStore()
+const store = useAvailableSeatStore()
 const showTable = () => {
     store.updateShowOtherTable();
 }

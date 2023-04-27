@@ -5,7 +5,6 @@ import router from '../router';
 //验证码登录api
 const userStore = useUserStore();
 export const captchaToLogin = () => {
-    // http://127.0.0.1:4523/m1/2597435-0-default/api/captchaLogin
     axios.post('/api/captchaToLogin', {
         userPhoneum: userStore.userPhoneNum,
         captcha: userStore.captchaNum
@@ -15,15 +14,15 @@ export const captchaToLogin = () => {
 
             let resMsg = res.data.msg;
             if (resMsg === "200") {
+                setTimeout(() => {
+                    sessionStorage.setItem('Id', res.data.userId)
+                    router.push('/')
+                }, 1000)
                 ElMessage({
                     showClose: true,
                     message: 'Congrats,登陆成功.',
                     type: 'success',
                 })
-                setTimeout(() => {
-                    sessionStorage.setItem('Id', res.data.userId)
-                    router.push('/')
-                }, 1000)
             }
             else {
                 ElMessage({

@@ -11,7 +11,6 @@ export const useReserveInfoStore = defineStore({
         }
     },
     getters: {
-
     },
     actions: {
         changeReserveInfo() {
@@ -21,45 +20,4 @@ export const useReserveInfoStore = defineStore({
             this.reserveInfoData = reserveInfoData
         }
     }
-
 })
-
-
-
-// // export const useReserveInfoStore = defineStore({
-// //     id: 'reserveInfo',
-
-// //     state: () => {
-// //         return {
-// //             floor: 0,
-// //             district: '',
-// //             table: 0,
-// //             ordinal: 0,
-// //             date: '',
-// //             beginTime: '',
-// //             endTime: ''
-// //         }
-// //     },
-// //     getters: {
-
-// //     },
-// //     actions: {
-// //         changeReserveInfo(floor: number,
-// //             district: string,
-// //             table: number,
-// //             ordinal: number,
-// //             date: string,
-// //             beginTime: string,
-// //             endTime: string) {
-// //             this.district = district
-// //             this.table = table
-// //             this.ordinal = ordinal
-// //             this.date = date
-// //             this.beginTime = beginTime
-// //             this.endTime = endTime
-// //         }
-// //     }
-
-// // })
-
-

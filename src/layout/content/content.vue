@@ -18,7 +18,7 @@
         <RouterView name="login"></RouterView>
       </div>
       <div v-if="showOtherTable" class='otherTable'>
-        <otherTable></otherTable>
+        <availableSeat></availableSeat>
       </div>
     </div>
   </el-main>
@@ -29,10 +29,10 @@ import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed,
 // import floorArea from '../../components/basic/floorArea.vue';
 import choseFloor from '../../components/core/choseFloor.vue';
 import choseSeat from '../../components/core/choseSeat.vue'
-import otherTable from '../../components/core/otherTable.vue';
+import availableSeat from '../../components/core/availableSeat.vue';
 import attention from '../../components/basic/attention.vue';
-import { useOtherTableStore } from '../../stores/otherTable'
-const store = useOtherTableStore()
+import { useAvailableSeatStore } from '../../stores/availableSeat'
+const store = useAvailableSeatStore()
 const showOtherTable = computed(() => store.showOtherTable)
 </script>
 <style scoped lang='less'>
@@ -63,9 +63,9 @@ const showOtherTable = computed(() => store.showOtherTable)
     position: fixed;
     right: 1vw;
     margin: 20px 0 0 25px;
-    height: 85vh;
+    height: 86vh;
     width: 25vw;
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.215);
   }
 }

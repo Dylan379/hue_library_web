@@ -1,19 +1,14 @@
-
-//4.20任务  尽量完成得到预约信息的接口  和  预约信息mock数据编写
-
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-// import router from '../router';
 import { ReserveInfo } from "../interface/reserveInfoInterface";
 import { useReserveInfoStore } from '../stores/reserveInfo';
 //验证码登录api
-// const userStore = useUserStore();
+//创建一个预约集合
 let reserveInfoData: ReserveInfo[];
 export const getReserveInfo = () => {
+    //在函数内得到预约信息仓库,避免提前挂载报错
     const reserveInfoStore = useReserveInfoStore()
-    // http://127.0.0.1:4523/m1/2597435-0-default/api/captchaLogin
-    // userId: sessionStorage.getItem('Id')
-    if (sessionStorage.getItem('id') != 'null') {
+    if (sessionStorage.getItem('id') != null) {
         axios.get('/api/getReserveInfo?id=' + sessionStorage.getItem('id'))
             .then((res) => {
                 const resData = res.data;
@@ -39,7 +34,7 @@ export const getReserveInfo = () => {
         ElMessage({
             showClose: true,
             message: 'Oops, 忘记登陆了?.',
-            type: 'error',
+            type: 'warning',
         })
     }
 

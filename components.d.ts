@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Area: typeof import('./src/components/basic/area.vue')['default']
     Attention: typeof import('./src/components/basic/attention.vue')['default']
+    AvailableSeat: typeof import('./src/components/core/availableSeat.vue')['default']
     Basic: typeof import('./src/components/basic/index.vue')['default']
     ChoseFloor: typeof import('./src/components/core/choseFloor.vue')['default']
     ChoseSeat: typeof import('./src/components/core/choseSeat.vue')['default']
