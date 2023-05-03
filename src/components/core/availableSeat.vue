@@ -22,15 +22,17 @@
                 <div class="fuzzyQueriesBar2">
                     <div>
                         <el-date-picker v-model="valueDatePicker" size="small" type="datetime" style="width: 11.5vw;"
-                            placeholder="选择日期和开始时间" format="YYYY/MM/DD HH:mm" value-format="YYYY-MM-DD HH:mm" />
+                            placeholder="选择日期和开始时间" format="YYYY/MM/DD HH:mm" value-format="YYYY-MM-DD HH:mm"
+                            :disabled-minutes="disabledMinutes" handleClose />
                     </div>
                     <span>To</span>
                     <div>
                         <el-time-picker v-model="valueTimePicker" size="small" style="width:6.7vw;" placeholder="结束时间"
-                            format="HH:mm" value-format="HH:mm" />
+                            format="HH:mm" value-format="HH:mm" handleClose />
                     </div>
                     <div class="searchBtn">
-                        <el-button type="primary" size="small" color="#9d1d22">
+                        <el-button @click="useDebounceToGetAvailableSeatInfoData" type="primary" size="small"
+                            color="#9d1d22">
                             <el-icon>
                                 <Search />
                             </el-icon>
@@ -41,7 +43,7 @@
             </div>
         </div>
         <div>
-            <el-table :data="tableData" height="71vh">
+            <el-table :data="availableSeatInfoData" height="71vh">
                 <el-table-column prop="floor" label="楼层" />
                 <el-table-column prop="district" label="区域" />
                 <el-table-column prop="seat" label="座位" />
@@ -52,10 +54,14 @@
 
 <script setup lang='ts'>
 import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed, watch } from 'vue';
-import { AvailableSeatInfo } from '../../interface/availableSeatRequstInterface';
+import { AvailableSeatRequstBody } from '../../interface/availableSeatRequstInterface';
 import { useAvailableSeatStore } from '../../stores/availableSeat';
+import getAvailableSeatInfo from '../../api/getAvailableSeats';
+import useCheckTimeRange from "../../hooks/useCheckTimeRange"
+import usethrottle from '../../hooks/usethrottle'
+import { storeToRefs } from 'pinia';
 const availableSeatStore = useAvailableSeatStore()
-const availableSeatRequstBody: AvailableSeatInfo = {
+const availableSeatRequstBody: AvailableSeatRequstBody = {
     date: '',
     district: '',
     floor: '',
@@ -65,7 +71,7 @@ const availableSeatRequstBody: AvailableSeatInfo = {
 const floorValue = ref('')
 const districtValue = ref('')
 const valueDatePicker = ref('')
-const valueTimePicker = ref('')
+const valueTimePicker = ref()
 const floorOptions = [
     {
         value: '1F',
@@ -103,121 +109,56 @@ const districtOptions = [
     }
 ]
 
-const tableData = [
-    {
-        floor: '1楼',
-        district: 'A区',
-        seat: '9-5',
-    },
-    {
-        floor: '2楼',
-        district: 'B区',
-        seat: '10-6',
-    },
-    {
-        floor: '3楼',
-        district: 'C区',
-        seat: '3-8',
-    },
-    {
-        floor: '4楼',
-        district: 'D区',
-        seat: '4-5',
-    },
-    {
-        floor: '3楼',
-        district: 'D区',
-        seat: '1-8',
-    },
-    {
-        floor: '2楼',
-        district: 'C区',
-        seat: '16-8',
-    },
-    {
-        floor: '1楼',
-        district: 'B区',
-        seat: '19-1',
-    },
-    {
-        floor: '1楼',
-        district: 'B区',
-        seat: '19-1',
-    },
-    {
-        floor: '1楼',
-        district: 'B区',
-        seat: '19-1',
-    },
-    {
-        floor: '1楼',
-        district: 'B区',
-        seat: '19-1',
-    },
-    {
-        floor: '1楼',
-        district: 'B区',
-        seat: '19-1',
-    },
-    {
-        floor: '1楼',
-        district: 'B区',
-        seat: '19-1',
-    },
-    {
-        floor: '1楼',
-        district: 'B区',
-        seat: '19-1',
-    },
-    {
-        floor: '1楼',
-        district: 'B区',
-        seat: '19-1',
-    },
-    {
-        floor: '1楼',
-        district: 'B区',
-        seat: '19-1',
-    },
-    {
-        floor: '1楼',
-        district: 'B区',
-        seat: '19-1',
-    },
-    {
-        floor: '1楼',
-        district: 'B区',
-        seat: '19-1',
-    },
-    {
-        floor: '1楼',
-        district: 'B区',
-        seat: '19-1',
-    },
-    {
-        floor: '1楼',
-        district: 'B区',
-        seat: '19-1',
+//设置分钟禁止范围
+const makeRange = (start: number, end: number) => {
+    const result: number[] = []
+    for (let i = start; i <= end; i++) {
+        result.push(i)
     }
-]
+    return result
+}
+const disabledMinutes = (hour: number) => {
+    return makeRange(1, 29).concat(makeRange(31, 59))
+}
 
-watch([floorValue, districtValue, valueDatePicker, valueTimePicker], () => {
-    //限制时间只能选择00 或 30
-    if (valueDatePicker.value.slice(14) < '30') { valueDatePicker.value = valueDatePicker.value.slice(0, 14).concat('00') }
-    else { valueDatePicker.value = valueDatePicker.value.slice(0, 14).concat('30') }
-
-    if (valueTimePicker.value.slice(3) < '30') { valueTimePicker.value = valueTimePicker.value.slice(0, 3).concat('00') }
-    else { valueTimePicker.value = valueTimePicker.value.slice(0, 3).concat('30') }
-
-    availableSeatRequstBody.floor = floorValue.value.slice(0, 1);
-    availableSeatRequstBody.district = districtValue.value.slice(0, 1)
-    availableSeatRequstBody.date = valueDatePicker.value.slice(5, 10)
-    availableSeatRequstBody.beginTime = valueDatePicker.value.slice(11,)
-    availableSeatRequstBody.endTime = valueTimePicker.value
-    availableSeatStore.changeAvailableSeatInfoData(availableSeatRequstBody)
+onMounted(() => {
+    availableSeatRequstBody.floor = "";
+    availableSeatRequstBody.district = ""
+    availableSeatRequstBody.date = ""
+    availableSeatRequstBody.beginTime = ""
+    availableSeatRequstBody.endTime = ""
+    availableSeatStore.changeAvailableSeatRequstBody(availableSeatRequstBody)
 })
 
+watch([floorValue, districtValue, valueDatePicker, valueTimePicker], () => {
+    if ((valueTimePicker.value != null) && (valueTimePicker.value.slice(3) < '30')) {
+        valueTimePicker.value = valueTimePicker.value.slice(0, 3).concat('00')
+    }
+    else if (valueTimePicker.value != null) {
+        valueTimePicker.value = valueTimePicker.value.slice(0, 3).concat('30')
+    }
+    if (valueDatePicker.value != null) {
+        //将信息保存到仓库中
+        availableSeatRequstBody.floor = floorValue.value.slice(0, 1);
+        availableSeatRequstBody.district = districtValue.value.slice(0, 1)
+        availableSeatRequstBody.date = valueDatePicker.value.slice(5, 10)
+        availableSeatRequstBody.beginTime = valueDatePicker.value.slice(11,)
+        availableSeatRequstBody.endTime = valueTimePicker.value
+        availableSeatStore.changeAvailableSeatRequstBody(availableSeatRequstBody)
+    } else if (valueDatePicker.value == null) {
+        availableSeatRequstBody.floor = floorValue.value.slice(0, 1);
+        availableSeatRequstBody.district = districtValue.value.slice(0, 1)
+        availableSeatRequstBody.date = ''
+        availableSeatRequstBody.beginTime = ''
+        availableSeatRequstBody.endTime = valueTimePicker.value
+        availableSeatStore.changeAvailableSeatRequstBody(availableSeatRequstBody)
+    }
+})
 
+//从仓库中拿到保存的信息
+const getAvailableSeatInfoData = useCheckTimeRange(getAvailableSeatInfo)
+const useDebounceToGetAvailableSeatInfoData = usethrottle(getAvailableSeatInfoData, 3000)
+const { availableSeatInfoData } = storeToRefs(availableSeatStore)
 
 </script>
 <style scoped lang='less'>
