@@ -23,7 +23,7 @@
                     <div>
                         <el-date-picker v-model="valueDatePicker" size="small" type="datetime" style="width: 11.5vw;"
                             placeholder="选择日期和开始时间" format="YYYY/MM/DD HH:mm" value-format="YYYY-MM-DD HH:mm"
-                            :disabled-minutes="disabledMinutes" handleClose />
+                            :disabled-hours="disabledHours" :disabled-minutes="disabledMinutes" handleClose />
                     </div>
                     <span>To</span>
                     <div>
@@ -117,7 +117,13 @@ const makeRange = (start: number, end: number) => {
     }
     return result
 }
-const disabledMinutes = (hour: number) => {
+
+const disabledHours = () => {
+    return makeRange(0, 7).concat(makeRange(22, 23))
+}
+
+
+const disabledMinutes = () => {
     return makeRange(1, 29).concat(makeRange(31, 59))
 }
 
