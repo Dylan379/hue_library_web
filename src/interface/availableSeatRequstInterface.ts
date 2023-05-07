@@ -1,4 +1,4 @@
-export interface AvailableSeatInfo {
+export interface AvailableSeatRequstBody {
     date: string;
     district: string;
     floor: string;

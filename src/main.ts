@@ -15,7 +15,7 @@ const app = createApp(App)
 // const app = createApp({
 //     render: () => h(App)
 // });
-axios.defaults.baseURL = 'http://127.0.0.1:4523/m1/2597435-0-default'
+axios.defaults.baseURL = 'https://mock.apifox.cn/m1/2597435-0-default'
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }

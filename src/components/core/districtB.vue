@@ -31,11 +31,24 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed } from 'vue';
+import { ref, reactive, toRefs, onBeforeMount, onMounted, watch, computed } from 'vue';
 import seat from '../basic/seat.vue';
 import verticalSeat from '../basic/verticalSeat.vue';
+import { getReserveSeat } from '../../api/getReserveSeat'
+import { useFloorAndDistrictStore } from '../../stores/floorAndDistrict';
+import { storeToRefs } from 'pinia';
+const floorAndDistrictStore = useFloorAndDistrictStore();
+const { floor } = storeToRefs(floorAndDistrictStore);
 const tables = 8;
 const verticalTables = 3
+onMounted(() => {
+    getReserveSeat()
+})
+watch(floor, () => {
+    if (floorAndDistrictStore.district === 'B') {
+        getReserveSeat()
+    }
+})
 </script>
 <style scoped lang='less'>
 .verticalSeat {
