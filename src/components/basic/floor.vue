@@ -9,6 +9,9 @@
 
 <script setup lang='ts'>
 import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed } from 'vue';
+import { useFloorAndDistrictStore } from '../../stores/floorAndDistrict';
+const floorAndDistrctStore = useFloorAndDistrictStore();
+
 //code for css
 onMounted(() => {
     const container1 = document.querySelector(".floor");
@@ -34,6 +37,7 @@ const change = (e: Event) => {
     currentBtn.style.cursor = 'not-allowed'
     currentBtn.style.backgroundColor = '#9e1a26';
     currentBtn.style.color = 'white';
+    floorAndDistrctStore.updateFloor(currentBtn.innerText.slice(0, 1))
 }
 //code for function
 </script>

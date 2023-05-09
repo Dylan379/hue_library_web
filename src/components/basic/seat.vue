@@ -36,11 +36,37 @@
 
 <script setup lang='ts'>
 import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed } from 'vue';
+import { useFloorAndDistrictStore } from '../../stores/floorAndDistrict';
+import { storeToRefs } from 'pinia';
+const floorAndDistrictStore = useFloorAndDistrictStore();
+const { floor, orderedSeatData } = storeToRefs(floorAndDistrictStore);
 </script>
 <style scoped lang='less'>
-.table {
-    width: 90px;
-    height: 20px;
-    border: 1px solid #000;
+.seat {
+    margin-right: 2vw;
+
+    .table {
+        width: 90px;
+        height: 20px;
+        border: 1px solid #000;
+        text-align: center;
+    }
+}
+
+.verticalSeat {
+    display: flex;
+    margin-top: 16vh;
+    height: 105px;
+    width: 45vw;
+
+    .verticalTable {
+        width: 20px;
+        height: 90px;
+        border: 1px solid #000;
+    }
+}
+
+.ordered {
+    color: #9d1d22;
 }
 </style>

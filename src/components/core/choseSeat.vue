@@ -6,6 +6,7 @@
 
 <script setup lang='ts'>
 import { shallowRef, watch } from 'vue';
+// import districtAA from './districtAA.vue';
 import districtA from '../../components/core/districtA.vue';
 import districtB from '../../components/core/districtB.vue';
 import districtC from '../../components/core/districtC.vue';

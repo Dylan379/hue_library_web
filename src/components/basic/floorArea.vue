@@ -10,7 +10,9 @@
 <script setup lang='ts'>
 import { onMounted } from 'vue';
 import { useFloorAreaStore } from '../../stores/floorArea';
-const areaStore = useFloorAreaStore()
+import { useFloorAndDistrictStore } from '../../stores/floorAndDistrict';
+const areaStore = useFloorAreaStore();
+const floorAndDistrctStore = useFloorAndDistrictStore();
 onMounted(() => {
     const container1 = document.querySelector(".floorArea");
     const btn1 = container1!.querySelector('.first');
@@ -36,6 +38,7 @@ const change = (e: Event) => {
     currentBtn.style.backgroundColor = '#9e1a26';
     currentBtn.style.color = 'white';
     areaStore.updateFloorArea('district' + (currentBtn.innerText).slice(0, 1))
+    floorAndDistrctStore.updateDistrict(currentBtn.innerText.slice(0, 1))
 }
 //code for function
 

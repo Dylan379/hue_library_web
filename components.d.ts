@@ -17,6 +17,8 @@ declare module '@vue/runtime-core' {
     ChoseSeat: typeof import('./src/components/core/choseSeat.vue')['default']
     Core: typeof import('./src/components/core/index.vue')['default']
     DistrictA: typeof import('./src/components/core/districtA.vue')['default']
+    DistrictAA: typeof import('./src/components/core/districtAA.vue')['default']
+    DistrictAAA: typeof import('./src/components/core/districtAAA.vue')['default']
     DistrictB: typeof import('./src/components/core/districtB.vue')['default']
     DistrictC: typeof import('./src/components/core/districtC.vue')['default']
     DistrictD: typeof import('./src/components/core/districtD.vue')['default']
