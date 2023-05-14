@@ -9,6 +9,8 @@ export const useFloorAndDistrictStore = defineStore({
         return {
             floor: '1',
             district: 'A',
+            table: '',
+            ordinal: '',
             reserveSeatData,
             orderedSeatData
         }
@@ -22,6 +24,12 @@ export const useFloorAndDistrictStore = defineStore({
         },
         updateDistrict(district: string) {
             this.district = district;
+        },
+        updateTable(table: string) {
+            this.table = table;
+        },
+        updateOrdinal(ordinal: string) {
+            this.ordinal = ordinal;
         },
         upDateReserveSeatData(reserveSeatData: Array<ReserveSeat>) {
             this.reserveSeatData = reserveSeatData;

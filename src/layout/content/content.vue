@@ -17,7 +17,7 @@
       <div>
         <RouterView name="login"></RouterView>
       </div>
-      <div v-if="showOtherTable" class='otherTable'>
+      <div v-if="showOtherTable" class='otherSeat'>
         <availableSeat></availableSeat>
       </div>
     </div>
@@ -59,9 +59,9 @@ const showOtherTable = computed(() => store.showOtherTable)
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.215);
   }
 
-  .otherTable {
+  .otherSeat {
     position: fixed;
-    right: 1vw;
+    left: 72vw;
     margin: 20px 0 0 25px;
     height: 86vh;
     width: 25vw;

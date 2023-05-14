@@ -1,7 +1,7 @@
 //fn是需要防抖的函数
 //delay是需要防抖所需要的时间，默认为1s
 //immediate是第一次触发是否执行
-export default function debounce(fn: Function, delay: number = 1000, immediate: boolean = false) {
+export default function debounce(fn: Function | any, delay: number = 1000, immediate: boolean = false) {
     //定时器
     let time: any = 0
     //使用isImmediateInvoke来判断是否立即执行，默认为false

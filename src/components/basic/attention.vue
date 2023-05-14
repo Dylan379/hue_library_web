@@ -9,8 +9,8 @@
             </li>
             <li class='py-1'>竖向桌序号:</li>
             <li class='text-center py-1'>
-                1&nbsp;2&nbsp;<br>3&nbsp;4&nbsp;<br>
-                5&nbsp;6&nbsp;<br>7&nbsp;8&nbsp;<br>
+                1&nbsp;5&nbsp;<br>2&nbsp;6&nbsp;<br>
+                3&nbsp;7&nbsp;<br>4&nbsp;8&nbsp;<br>
             </li>
         </ul>
     </div>
