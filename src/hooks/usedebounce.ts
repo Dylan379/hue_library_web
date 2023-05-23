@@ -3,7 +3,7 @@
 //immediate是第一次触发是否执行
 export default function debounce(fn: Function | any, delay: number = 1000, immediate: boolean = false) {
     //定时器
-    let time: any = 0
+    let time: number = 0
     //使用isImmediateInvoke来判断是否立即执行，默认为false
     let isImmediateInvoke = false
     function _debounce(this: any, ...args: any[]) {

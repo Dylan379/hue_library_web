@@ -6,12 +6,10 @@ import router from '../router';
 const userStore = useUserStore();
 export const captchaToLogin = () => {
     axios.post('/api/captchaToLogin', {
-        userPhoneum: userStore.userPhoneNum,
-        captcha: userStore.captchaNum
+        userPhoneNum: userStore.userPhoneNum,
+        captchaNum: userStore.captchaNum
     })
         .then((res) => {
-            console.log(res);
-
             let resMsg = res.data.msg;
             if (resMsg === "200") {
                 setTimeout(() => {

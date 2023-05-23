@@ -20,20 +20,9 @@
           </div>
         </div>
         <div>
-          <form action="">
-            <div>
-              <div class='border-2 border-solid rounded-md border-gray-200 mx-20'>
-                <component :is="loginWay" />
-              </div>
-              <div class='flex justify-center'>
-                <div class='flex w-56 mt-3  justify-between '>
-                  <!--4月17日需 完善验证码登录的逻辑 -->
-                  <component v-if="toRegist" :is="loginWithPwd"></component>
-                  <component v-else :is="loginWithRegist" />
-                </div>
-              </div>
-            </div>
-          </form>
+          <div>
+            <component :is="loginWay" />
+          </div>
         </div>
       </div>
     </div>

@@ -65,6 +65,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Seat: typeof import('./src/components/basic/seat.vue')['default']
+    SeatColorMean: typeof import('./src/components/basic/seatColorMean.vue')['default']
     Table: typeof import('./src/components/basic/table.vue')['default']
     VerticalSeat: typeof import('./src/components/basic/verticalSeat.vue')['default']
   }

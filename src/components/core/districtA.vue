@@ -6,7 +6,7 @@
                 <div class='flex'>
                     <div v-for="(item, index1) in (table || '').slice(0, 4)" :key="index1">
                         <el-icon @click="showSeatDetail(index + 1, index1 + 1)" class='mr-2'
-                            :class="item.reserveNum ? 'ordered' : ''">
+                            :class="item.reserveNum ? (item.reserveNum > '2' ? 'fullOrdered' : 'notFullOrdered') : ''">
                             <UserFilled />
                         </el-icon>
                     </div>
@@ -17,7 +17,7 @@
                 <div class='flex'>
                     <div v-for="(item, index2) in (table || '').slice(4,)" :key="index2">
                         <el-icon @click="showSeatDetail(index + 1, index2 + 5)" class='mr-2 mb-4'
-                            :class="item.reserveNum ? 'ordered' : ''">
+                            :class="item.reserveNum ? (item.reserveNum > '2' ? 'fullOrdered' : 'notFullOrdered') : ''">
                             <UserFilled />
                         </el-icon>
                     </div>
@@ -30,7 +30,7 @@
                     <div>
                         <div class='ml-4' v-for="(item, index3) in   (table || '').slice(0, 4)  " :key="index3">
                             <el-icon @click="showSeatDetail(index + 9, index3 + 1)" class='mr-1'
-                                :class="item.reserveNum ? 'ordered' : ''">
+                                :class="item.reserveNum ? (item.reserveNum > '2' ? 'fullOrdered' : 'notFullOrdered') : ''">
                                 <UserFilled />
                             </el-icon>
                         </div>
@@ -41,7 +41,7 @@
                     <div>
                         <div class='ml-1' v-for="(  item, index4  ) in   (table || '').slice(4,)  " :key="index4">
                             <el-icon @click="showSeatDetail(index + 9, index4 + 5)" class='mr-2'
-                                :class="item.reserveNum ? 'ordered' : ''">
+                                :class="item.reserveNum ? (item.reserveNum > '2' ? 'fullOrdered' : 'notFullOrdered') : ''">
                                 <UserFilled />
                             </el-icon>
                         </div>
@@ -105,7 +105,12 @@ watch(floor, () => {
     }
 }
 
-.ordered {
+
+.fullOrdered {
     color: #9d1d22;
+}
+
+.notFullOrdered {
+    color: rgb(249, 192, 6);
 }
 </style>

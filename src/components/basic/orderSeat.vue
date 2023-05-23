@@ -51,6 +51,7 @@ import { OrderSeatRequestBody } from '../../interface/orderSeatRequestInterface'
 import { useReserveInfoStore } from '../../stores/reserveInfo';
 import getSeatReserveInfo from '../../api/getSeatReserveInfo'
 import toOrderSeat from '../../api/toOrderSeat'
+import useCheckOrderTime from '../../hooks/useCheckOrderTime'
 import usedebounce from '../../hooks/usedebounce'
 import usethrottle from '../../hooks/usethrottle'
 import { storeToRefs } from 'pinia';
@@ -73,10 +74,7 @@ const orderSeatRequestBody: OrderSeatRequestBody = {
 function orderSeat() {
     if (orderSeatRequestBody.date != '' && orderSeatRequestBody.endTime != '' && orderSeatRequestBody.endTime != null && orderSeatRequestBody.endTime != undefined) {
         isLoading.value = true
-        setTimeout(() => {
-            toOrderSeat()
-        }, 3000)
-        console.log(orderSeatRequestBody.endTime);
+        usedebounce(useCheckOrderTime(toOrderSeat))()
     } else {
         ElMessage({
             showClose: true,

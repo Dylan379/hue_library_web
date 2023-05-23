@@ -3,7 +3,10 @@
     <div class="content">
       <div>
         <div class="leftSide">
-          <div>
+          <div class="seatColorMean">
+            <seatColorMean></seatColorMean>
+          </div>
+          <div class="choseFloor">
             <choseFloor></choseFloor>
           </div>
           <div class="attention">
@@ -31,6 +34,7 @@ import choseFloor from '../../components/core/choseFloor.vue';
 import choseSeat from '../../components/core/choseSeat.vue'
 import availableSeat from '../../components/core/availableSeat.vue';
 import attention from '../../components/basic/attention.vue';
+import seatColorMean from '../../components/basic/seatColorMean.vue';
 import { useAvailableSeatStore } from '../../stores/availableSeat'
 const store = useAvailableSeatStore()
 const showOtherTable = computed(() => store.showOtherTable)
@@ -43,10 +47,15 @@ const showOtherTable = computed(() => store.showOtherTable)
 
   .leftSide {
     position: fixed;
+    display: table-column;
 
-    // overflow: hidden;
+    .seatColorMean {
+      position: fixed;
+      top: 11.5vh;
+    }
+
     .attention {
-      margin-top: 20px;
+      margin-top: 50px;
     }
   }
 
