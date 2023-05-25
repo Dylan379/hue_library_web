@@ -2,23 +2,25 @@ import axios from 'axios'
 import { useUserStore } from '../stores/user';
 import { ElMessage } from 'element-plus'
 import router from '../router';
+import { User } from '../interface/userInterface';
 //登录模块
 const userStore = useUserStore();
 export const pwdToLogin = () => {
     axios.post('/api/toLogin', {
-        userName: userStore.userName,
+        userStuId: userStore.userStuId,
         userPwd: userStore.userPwd
     })
         .then((res) => {
             const resMsg = res.data.msg;
             if (resMsg === "200") {
+                sessionStorage.setItem('Id', res.data.userId)
+                sessionStorage.setItem('userAvatarUrl', res.data.userAvatarUrl)
                 ElMessage({
                     showClose: true,
                     message: 'Congrats,登陆成功.',
                     type: 'success',
                 })
                 setTimeout(() => {
-                    sessionStorage.setItem('id', res.data.userId)
                     router.push('/')
                 }, 1000)
             } else if (resMsg === '201') {

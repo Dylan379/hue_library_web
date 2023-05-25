@@ -8,8 +8,8 @@ let reserveInfoData: ReserveInfo[];
 export const getReserveInfo = () => {
     //在函数内得到预约信息仓库,避免提前挂载报错
     const reserveInfoStore = useReserveInfoStore()
-    if (sessionStorage.getItem('id') != null) {
-        axios.get('/api/getReserveInfo?id=' + sessionStorage.getItem('id'))
+    if (sessionStorage.getItem('Id') != null) {
+        axios.get('/api/getReserveInfo?userId=' + sessionStorage.getItem('Id'))
             .then((res) => {
                 const resData = res.data;
                 reserveInfoData = resData;

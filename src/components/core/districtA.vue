@@ -5,7 +5,7 @@
             <div v-for="(table, index) in (orderedSeatData || '').slice(0, 8)" :key="index">
                 <div class='flex'>
                     <div v-for="(item, index1) in (table || '').slice(0, 4)" :key="index1">
-                        <el-icon @click="showSeatDetail(index + 1, index1 + 1)" class='mr-2'
+                        <el-icon @click="showSeatDetail(index + 1, index1 + 1); orderSeat = !orderSeat" class='mr-2'
                             :class="item.reserveNum ? (item.reserveNum > '2' ? 'fullOrdered' : 'notFullOrdered') : ''">
                             <UserFilled />
                         </el-icon>
@@ -16,7 +16,7 @@
                 </div>
                 <div class='flex'>
                     <div v-for="(item, index2) in (table || '').slice(4,)" :key="index2">
-                        <el-icon @click="showSeatDetail(index + 1, index2 + 5)" class='mr-2 mb-4'
+                        <el-icon @click="showSeatDetail(index + 1, index2 + 5); orderSeat = !orderSeat" class='mr-2 mb-4'
                             :class="item.reserveNum ? (item.reserveNum > '2' ? 'fullOrdered' : 'notFullOrdered') : ''">
                             <UserFilled />
                         </el-icon>
@@ -29,7 +29,7 @@
                 <div class='flex' v-for="(table, index) in   (orderedSeatData || '').slice(8,)  " :key="index">
                     <div>
                         <div class='ml-4' v-for="(item, index3) in   (table || '').slice(0, 4)  " :key="index3">
-                            <el-icon @click="showSeatDetail(index + 9, index3 + 1)" class='mr-1'
+                            <el-icon @click="showSeatDetail(index + 9, index3 + 1); orderSeat = !orderSeat" class='mr-1'
                                 :class="item.reserveNum ? (item.reserveNum > '2' ? 'fullOrdered' : 'notFullOrdered') : ''">
                                 <UserFilled />
                             </el-icon>
@@ -40,7 +40,7 @@
                     </div>
                     <div>
                         <div class='ml-1' v-for="(  item, index4  ) in   (table || '').slice(4,)  " :key="index4">
-                            <el-icon @click="showSeatDetail(index + 9, index4 + 5)" class='mr-2'
+                            <el-icon @click="showSeatDetail(index + 9, index4 + 5); orderSeat = !orderSeat" class='mr-2'
                                 :class="item.reserveNum ? (item.reserveNum > '2' ? 'fullOrdered' : 'notFullOrdered') : ''">
                                 <UserFilled />
                             </el-icon>
@@ -56,27 +56,21 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed, watch } from 'vue';
-import { getReserveSeat } from '../../api/getReserveSeat';
+import { ref, onMounted, watch } from 'vue';
+import { getThisFloorSeat } from '../../api/getThisFloorSeat';
 import { useFloorAndDistrictStore } from '../../stores/floorAndDistrict';
 import { storeToRefs } from 'pinia';
+import showSeatDetail from '../../hooks/showSeatDetail';
 import orderSeatVue from '../basic/orderSeat.vue';
 let orderSeat = ref(false);
 const floorAndDistrictStore = useFloorAndDistrictStore();
 const { floor, orderedSeatData } = storeToRefs(floorAndDistrictStore);
-const showSeatDetail = (table: number, ordinal: number) => {
-    orderSeat.value = true;
-    floorAndDistrictStore.updateTable(table + '');
-    floorAndDistrictStore.updateOrdinal(ordinal + '');
-
-}
-
 onMounted(() => {
-    getReserveSeat()
+    getThisFloorSeat()
 })
 watch(floor, () => {
     if (floorAndDistrictStore.district === 'A') {
-        getReserveSeat()
+        getThisFloorSeat()
     }
 })
 </script>

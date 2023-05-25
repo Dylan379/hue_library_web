@@ -17,7 +17,6 @@
                 </div>
             </div>
             <div class='flex pt-5 justify-center'>
-                <!-- <el-button plain color="#9d1d22" size='large'>注册</el-button> -->
                 <el-button color="#9d1d22" size='large' @click="useDebounceToLogin">注册/登录</el-button>
             </div>
         </div>
@@ -52,10 +51,11 @@ const rules = reactive<FormRules>({
 //登录api
 const toLogin = captchaToLogin;
 //登录防抖
-const useDebounceToLogin = () => {
+const updateDataToLogin = () => {
     userStore.changePhoneNum(phoneRuleForm.phoneNum, parseInt(phoneRuleForm.phoneCheck));
-    useDebounce(toLogin, 1500)()
+    toLogin();
 }
+const useDebounceToLogin = useDebounce(updateDataToLogin, 1500, false)
 
 //将更新完成的数据存入商店
 

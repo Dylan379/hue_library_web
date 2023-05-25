@@ -5,12 +5,16 @@
                 <div><img class="titleLogo" src="../../assets/images/logo/titleLogo.svg" alt=""></div>
                 <h4 class="titleText">崇德尚善, 精工铸新</h4>
             </div>
-
-            <!--4月18日需 编写预约信息mock数据与接口,实现预约信息展示 -->
             <div class="authBar">
                 <ul class="authNav">
-                    <li><el-button plain circle size="large" color="#9d1d22">背景</el-button></li>
-                    <li><el-button plain size="large" color="#9d1d22" @click="toLogin">登录</el-button></li>
+                    <!-- :src="userInfo.userAvatarUrl" -->
+                    <li v-if="loginStore.isLogin"><el-button plain circle color="black" size="large">
+                            <el-avatar :src="userAvatarUrl" @error="errorHandler">
+                                <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
+                            </el-avatar>
+                        </el-button>
+                    </li>
+                    <li v-else><el-button plain size="large" color="#9d1d22" @click="toLogin">登录</el-button></li>
                     <li>
                         <component :is="myReserve"></component>
                     </li>
@@ -21,15 +25,29 @@
     </el-header>
 </template>
 <script setup lang='ts'>
-import { ref, reactive, watch, watchEffect } from 'vue';
+import { ref, reactive, watch, watchEffect, onMounted, onBeforeMount } from 'vue';
 import myReserve from '../../components/basic/myReserve.vue';
 import router from '../../router';
 import { useAvailableSeatStore } from '../../stores/availableSeat'
+import getUserInfo from '../../api/getUserInfo';
+import { useLoginStore } from '../../stores/login'
+import { useUserStore } from '../../stores/user';
+import { storeToRefs } from 'pinia';
+const loginStore = useLoginStore();
+const userStore = useUserStore();
+const { userAvatarUrl } = storeToRefs(userStore)
+const errorHandler = () => true
+//查找是否登录
+onMounted(() => {
+    if (sessionStorage.getItem('Id')) {
+        loginStore.isLogin = true
+        userStore.updataUserAvatarUrl(sessionStorage.getItem('userAvatarUrl'))
+    }
+})
 //登录
 const toLogin = () => {
     router.push('/login')
 }
-
 //还有座位吗
 const store = useAvailableSeatStore()
 const showTable = () => {

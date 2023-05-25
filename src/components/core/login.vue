@@ -30,14 +30,15 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive, toRefs, shallowRef, onMounted, watchEffect, computed, watch } from 'vue';
+import { ref, reactive, toRefs, shallowRef, onMounted, watchEffect, computed, watch, onUnmounted } from 'vue';
 import pwdLogin from '../basic/pwdLogin.vue'
 import phoneNumLogin from '../basic/phoneNumLogin.vue'
-import loginWithRegist from '../basic/loginWithRegist.vue'
-import loginWithPwd from '../basic/loginWithPwd.vue';
+import getUserInfo from '../../api/getUserInfo';
 import { useLoginStore } from '../../stores/login';
+import { useUserStore } from '../../stores/user';
 import { storeToRefs } from 'pinia';
 const loginStore = useLoginStore()
+const userStore = useUserStore();
 const { isRegist } = storeToRefs(loginStore)
 //控制登录面板组件跳转
 let pwdLoginVue = shallowRef(pwdLogin);
@@ -48,6 +49,15 @@ watch(isRegist, () => {
   toRegist.value = !toRegist;
   loginWay.value = phoneNumLogin;
 })
+
+//登录界面卸载时判断是否已经登陆
+onUnmounted(() => {
+  if (sessionStorage.getItem('Id')) {
+    loginStore.isLogin = false;
+    userStore.updataUserAvatarUrl(sessionStorage.getItem('userAvatarUrl'))
+  }
+})
+
 </script>
 <style scoped lang='less'>
 .login-mask {

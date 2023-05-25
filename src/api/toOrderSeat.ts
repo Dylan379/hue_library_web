@@ -6,7 +6,6 @@ export default function toOrderSeat() {
     const reserveInfoStore = useReserveInfoStore();
     let orderSeatRequestBody: OrderSeatRequestBody;
     orderSeatRequestBody = reserveInfoStore.orderSeatRequestBody
-    console.log(orderSeatRequestBody);
     axios.post('/api/toOrderSeat', {
         params: orderSeatRequestBody
     })

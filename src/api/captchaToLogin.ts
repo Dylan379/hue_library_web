@@ -10,10 +10,11 @@ export const captchaToLogin = () => {
         captchaNum: userStore.captchaNum
     })
         .then((res) => {
-            let resMsg = res.data.msg;
+            const resMsg = res.data.msg;
             if (resMsg === "200") {
+                sessionStorage.setItem('Id', res.data.userId)
+                sessionStorage.setItem('userAvatarUrl', res.data.userAvatarUrl)
                 setTimeout(() => {
-                    sessionStorage.setItem('Id', res.data.userId)
                     router.push('/')
                 }, 1000)
                 ElMessage({

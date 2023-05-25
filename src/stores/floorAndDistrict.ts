@@ -34,7 +34,7 @@ export const useFloorAndDistrictStore = defineStore({
         upDateReserveSeatData(reserveSeatData: Array<ReserveSeat>) {
             this.reserveSeatData = reserveSeatData;
         },
-        upDateOrderedSeatDataData(orderedSeatData: Array<Array<OrderedSeat>>) {
+        upDateOrderedSeatData(orderedSeatData: Array<Array<OrderedSeat>>) {
             this.orderedSeatData = orderedSeatData;
         }
 

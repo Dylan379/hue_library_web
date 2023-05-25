@@ -22,6 +22,7 @@ declare module '@vue/runtime-core' {
     DistrictB: typeof import('./src/components/core/districtB.vue')['default']
     DistrictC: typeof import('./src/components/core/districtC.vue')['default']
     DistrictD: typeof import('./src/components/core/districtD.vue')['default']
+    ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']

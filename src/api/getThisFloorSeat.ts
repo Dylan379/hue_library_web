@@ -5,11 +5,10 @@ import { useFloorAndDistrictStore } from '../stores/floorAndDistrict';
 //验证码登录api
 //创建一个预约集合
 let orderedSeatData: OrderedSeat[][];
-export const getReserveSeat = () => {
+export const getThisFloorSeat = () => {
     //在函数内得到预约信息仓库,避免提前挂载报错
-    // const reserveInfoStore = useReserveInfoStore();
     const floorAndDistrictStore = useFloorAndDistrictStore();
-    axios.post('/api/getReserveSeat', {
+    axios.post('/api/getThisFloorSeat', {
         floor: floorAndDistrictStore.floor,
         district: floorAndDistrictStore.district
     })
@@ -17,7 +16,7 @@ export const getReserveSeat = () => {
             const resData = res.data;
             orderedSeatData = resData;
             //更新仓库信息
-            floorAndDistrictStore.upDateOrderedSeatDataData(orderedSeatData)
+            floorAndDistrictStore.upDateOrderedSeatData(orderedSeatData)
         })
         .catch((res) => {
             ElMessage({

@@ -37,8 +37,14 @@ const loginStore = useLoginStore()
 const isRegist = () => {
     loginStore.isRegist = !loginStore.isRegist
 }
+
+//登录规则验证
 const ruleFormRef = ref<FormInstance>()
 const userStore = useUserStore()
+
+
+
+
 let userRuleForm = reactive({
     userName: '',
     userPwd: ''
@@ -65,8 +71,7 @@ const rules = reactive<FormRules>({
     userName: [{ validator: validateUserName, trigger: 'blur' }],
 })
 
-
-
+//持续更新用户登陆数据
 onUpdated(() => {
     userStore.changeUserInfo(userRuleForm.userName, userRuleForm.userPwd);
 })
@@ -74,16 +79,18 @@ onUpdated(() => {
 //登录api
 const toLogin = pwdToLogin;
 //登录验证+防抖
-const useDebounceToLogin = (formEl: FormInstance | undefined) => {
+const validToLogin = (formEl: FormInstance | undefined) => {
     if (!formEl) return
     formEl.validate((valid) => {
         if (valid) {
-            usedebounce(toLogin, 1500, false)()
+            toLogin()
         } else {
             return false
         }
     })
-} 
+}
+const useDebounceToLogin = usedebounce(validToLogin, 1500, false)
+
 </script>
 <style scoped lang='less'>
 :deep(.el-input__wrapper) {

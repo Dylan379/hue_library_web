@@ -83,9 +83,7 @@ function orderSeat() {
         })
     }
 }
-//预约信息
-//发送查询预约信息的请求
-const showSeatReserveInfoData = usethrottle(getSeatReserveInfo, 1000)
+
 //从对应商店中拿到保存的信息
 const reserveInfoStore = useReserveInfoStore()
 const { seatReserveInfoData, isLoading } = storeToRefs(reserveInfoStore)
@@ -103,7 +101,6 @@ const disabledHours = () => {
     return makeRange(0, 7).concat(makeRange(22, 23))
 }
 
-
 const disabledMinutes = () => {
     return makeRange(1, 29).concat(makeRange(31, 59))
 }
@@ -111,7 +108,7 @@ const disabledMinutes = () => {
 
 
 onMounted(() => {
-    showSeatReserveInfoData()
+    // showSeatReserveInfoData()
     orderSeatRequestBody.floor = floor.value;
     orderSeatRequestBody.district = district.value;
     orderSeatRequestBody.table = table.value;
@@ -122,9 +119,6 @@ onMounted(() => {
     reserveInfoStore.updateOrderSeatRequestBody(orderSeatRequestBody);
 })
 
-watch([floor, district, table, ordinal], () => {
-    showSeatReserveInfoData()
-})
 watch([floor, district, table, ordinal, valueDatePicker, valueTimePicker], () => {
     if ((valueTimePicker.value != null) && (valueTimePicker.value.slice(3) < '30')) {
         valueTimePicker.value = valueTimePicker.value.slice(0, 3).concat('00')
