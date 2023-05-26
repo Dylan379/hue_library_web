@@ -8,7 +8,7 @@ export const useLoginStore = defineStore({
             showLogin: false,
             isRegist: true,
             loginWay: '',
-            isLogin: true
+            isLogin: false
         }
     },
     getters: {

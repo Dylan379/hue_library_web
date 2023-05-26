@@ -53,7 +53,9 @@ watch(isRegist, () => {
 //登录界面卸载时判断是否已经登陆
 onUnmounted(() => {
   if (sessionStorage.getItem('Id')) {
-    loginStore.isLogin = false;
+    //更改为登陆状态
+    loginStore.isLogin = true;
+    //得到头像Url
     userStore.updataUserAvatarUrl(sessionStorage.getItem('userAvatarUrl'))
   }
 })

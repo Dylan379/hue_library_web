@@ -46,16 +46,16 @@
 
 <script setup lang='ts'>
 import { ref, reactive, toRefs, onBeforeMount, onMounted, watch, computed } from 'vue';
-import { useFloorAndDistrictStore } from '../../stores/floorAndDistrict';
-import { OrderSeatRequestBody } from '../../interface/orderSeatRequestInterface'
-import { useReserveInfoStore } from '../../stores/reserveInfo';
-import getSeatReserveInfo from '../../api/getSeatReserveInfo'
 import toOrderSeat from '../../api/toOrderSeat'
+import { OrderSeatRequestBody } from '../../interface/orderSeatRequestInterface'
 import useCheckOrderTime from '../../hooks/useCheckOrderTime'
 import usedebounce from '../../hooks/usedebounce'
-import usethrottle from '../../hooks/usethrottle'
+import { useFloorAndDistrictStore } from '../../stores/floorAndDistrict';
+import { useLoginStore } from '../../stores/login';
+import { useReserveInfoStore } from '../../stores/reserveInfo';
 import { storeToRefs } from 'pinia';
 import { ElMessage } from 'element-plus';
+const loginStore = useLoginStore();
 const floorAndDistrictStore = useFloorAndDistrictStore();
 const { floor, district, table, ordinal } = storeToRefs(floorAndDistrictStore);
 const valueDatePicker = ref('')
@@ -69,19 +69,31 @@ const orderSeatRequestBody: OrderSeatRequestBody = {
     beginTime: '',
     endTime: ''
 }
-
 //发送预约座位的请求
 function orderSeat() {
-    if (orderSeatRequestBody.date != '' && orderSeatRequestBody.endTime != '' && orderSeatRequestBody.endTime != null && orderSeatRequestBody.endTime != undefined) {
-        isLoading.value = true
-        usedebounce(useCheckOrderTime(toOrderSeat))()
+    if (loginStore.isLogin) {
+        if (orderSeatRequestBody.date != '' && orderSeatRequestBody.endTime != '' && orderSeatRequestBody.endTime != null && orderSeatRequestBody.endTime != undefined) {
+            isLoading.value = true
+            usedebounce(useCheckOrderTime(toOrderSeat))()
+        } else {
+            ElMessage({
+                showClose: true,
+                message: 'Oops, 请输入完整信息.',
+                type: 'error'
+            })
+        }
     } else {
         ElMessage({
             showClose: true,
-            message: 'Oops, 请输入完整信息.',
-            type: 'error',
+            message: 'Oops, 不妨先登录.',
+            type: 'error'
         })
     }
+
+
+
+
+
 }
 
 //从对应商店中拿到保存的信息
@@ -108,7 +120,6 @@ const disabledMinutes = () => {
 
 
 onMounted(() => {
-    // showSeatReserveInfoData()
     orderSeatRequestBody.floor = floor.value;
     orderSeatRequestBody.district = district.value;
     orderSeatRequestBody.table = table.value;

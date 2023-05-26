@@ -62,7 +62,6 @@ import { useFloorAndDistrictStore } from '../../stores/floorAndDistrict';
 import orderSeatVue from '../basic/orderSeat.vue';
 import { storeToRefs } from 'pinia';
 import showSeatDetail from '../../hooks/showSeatDetail';
-
 const orderSeat = ref(false);
 const floorAndDistrictStore = useFloorAndDistrictStore();
 const { floor, orderedSeatData } = storeToRefs(floorAndDistrictStore);
