@@ -1,5 +1,6 @@
 <template>
-    <div>C区</div>
+    <div>
+        <div class="text-xl mb-4 ml-96">C区</div>
     <div class='flex'>
         <div class="seat">
             <div v-for="(table, index) in (orderedSeatData || '').slice(0, 10)" :key="index">
@@ -53,6 +54,7 @@
             <orderSeatVue></orderSeatVue>
         </el-drawer>
     </div>
+    </div>
 </template>
 
 <script setup lang='ts'>
@@ -90,7 +92,7 @@ watch(floor, () => {
     display: flex;
     margin-top: 15vh;
     height: 105px;
-    width: 50vw;
+    width: 45vw;
 
     .verticalTable {
         width: 20px;

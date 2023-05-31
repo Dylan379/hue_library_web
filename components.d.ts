@@ -68,6 +68,8 @@ declare module '@vue/runtime-core' {
     Seat: typeof import('./src/components/basic/seat.vue')['default']
     SeatColorMean: typeof import('./src/components/basic/seatColorMean.vue')['default']
     Table: typeof import('./src/components/basic/table.vue')['default']
+    UserInfo: typeof import('./src/components/core/userInfo.vue')['default']
+    UserInfoTab: typeof import('./src/components/core/userInfoTab.vue')['default']
     VerticalSeat: typeof import('./src/components/basic/verticalSeat.vue')['default']
   }
 }

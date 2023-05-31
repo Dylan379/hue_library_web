@@ -1,46 +1,25 @@
 <template>
-    <div>D区</div>
-    <div class='flex'>
-        <div class="seat">
-            <div v-for="(table, index) in (orderedSeatData || '').slice(0, 4)" :key="index">
-                <div class='flex'>
-                    <div v-for="(item, index1) in (table || '').slice(0, 4)" :key="index1">
-                        <el-icon @click="showSeatDetail(index + 1, index1 + 1); orderSeat = !orderSeat" class='mr-2'
-                            :class="item.reserveNum ? (item.reserveNum > '2' ? 'fullOrdered' : 'notFullOrdered') : ''">
-                            <UserFilled />
-                        </el-icon>
-                    </div>
-                </div>
-                <div class="table">
-                    {{ index + 1 }}
-                </div>
-                <div class='flex'>
-                    <div v-for="(item, index2) in (table || '').slice(4,)" :key="index2">
-                        <el-icon @click="showSeatDetail(index + 1, index2 + 5); orderSeat = !orderSeat" class='mr-2 mb-4'
-                            :class="item.reserveNum ? (item.reserveNum > '2' ? 'fullOrdered' : 'notFullOrdered') : ''">
-                            <UserFilled />
-                        </el-icon>
-                    </div>
-                </div>
-            </div>
+    <div>
+        <div class="text-xl mb-4 ml-96">
+        D区
         </div>
-        <el-scrollbar>
-            <div class='verticalSeat'>
-                <div class='flex' v-for="(table, index) in   (orderedSeatData || '').slice(4,)  " :key="index">
-                    <div>
-                        <div class='ml-4' v-for="(item, index3) in   (table || '').slice(0, 4)  " :key="index3">
-                            <el-icon @click="showSeatDetail(index + 5, index3 + 1); orderSeat = !orderSeat" class='mr-1'
+        <div class='flex'>
+            <div class="seat">
+                <div v-for="(table, index) in (orderedSeatData || '').slice(0, 4)" :key="index">
+                    <div class='flex'>
+                        <div v-for="(item, index1) in (table || '').slice(0, 4)" :key="index1">
+                            <el-icon @click="showSeatDetail(index + 1, index1 + 1); orderSeat = !orderSeat" class='mr-2'
                                 :class="item.reserveNum ? (item.reserveNum > '2' ? 'fullOrdered' : 'notFullOrdered') : ''">
                                 <UserFilled />
                             </el-icon>
                         </div>
                     </div>
-                    <div class='pt-9 pb-9 text-center verticalTable'>
-                        {{ index + 5 }}
+                    <div class="table">
+                        {{ index + 1 }}
                     </div>
-                    <div>
-                        <div class='ml-1' v-for="(  item, index4  ) in   (table || '').slice(4,)  " :key="index4">
-                            <el-icon @click="showSeatDetail(index + 5, index4 + 5); orderSeat = !orderSeat" class='mr-2'
+                    <div class='flex'>
+                        <div v-for="(item, index2) in (table || '').slice(4,)" :key="index2">
+                            <el-icon @click="showSeatDetail(index + 1, index2 + 5); orderSeat = !orderSeat" class='mr-2 mb-4'
                                 :class="item.reserveNum ? (item.reserveNum > '2' ? 'fullOrdered' : 'notFullOrdered') : ''">
                                 <UserFilled />
                             </el-icon>
@@ -48,10 +27,35 @@
                     </div>
                 </div>
             </div>
-        </el-scrollbar>
-        <el-drawer ref="drawerRef" v-model="orderSeat" title="欢迎预约该座位!" direction="rtl" class="demo-drawer">
-            <orderSeatVue></orderSeatVue>
-        </el-drawer>
+            <el-scrollbar>
+                <div class='verticalSeat'>
+                    <div class='flex' v-for="(table, index) in   (orderedSeatData || '').slice(4,)  " :key="index">
+                        <div>
+                            <div class='ml-4' v-for="(item, index3) in   (table || '').slice(0, 4)  " :key="index3">
+                                <el-icon @click="showSeatDetail(index + 5, index3 + 1); orderSeat = !orderSeat" class='mr-1'
+                                    :class="item.reserveNum ? (item.reserveNum > '2' ? 'fullOrdered' : 'notFullOrdered') : ''">
+                                    <UserFilled />
+                                </el-icon>
+                            </div>
+                        </div>
+                        <div class='pt-9 pb-9 text-center verticalTable'>
+                            {{ index + 5 }}
+                        </div>
+                        <div>
+                            <div class='ml-1' v-for="(  item, index4  ) in   (table || '').slice(4,)  " :key="index4">
+                                <el-icon @click="showSeatDetail(index + 5, index4 + 5); orderSeat = !orderSeat" class='mr-2'
+                                    :class="item.reserveNum ? (item.reserveNum > '2' ? 'fullOrdered' : 'notFullOrdered') : ''">
+                                    <UserFilled />
+                                </el-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </el-scrollbar>
+            <el-drawer ref="drawerRef" v-model="orderSeat" title="欢迎预约该座位!" direction="rtl" class="demo-drawer">
+                <orderSeatVue></orderSeatVue>
+            </el-drawer>
+        </div> 
     </div>
 </template>
 
@@ -93,7 +97,7 @@ watch(floor, () => {
     display: flex;
     margin-top: 15vh;
     height: 105px;
-    width: 47vw;
+    width: 45vw;
 
     .verticalTable {
         width: 20px;

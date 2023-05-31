@@ -30,7 +30,7 @@ import { captchaToLogin } from '../../api/captchaToLogin'
 import useDebounce from '../../hooks/usedebounce'
 const userStore = useUserStore()
 const ruleFormRef = ref<FormInstance>()
-let phoneRuleForm = reactive({
+const phoneRuleForm = reactive({
     phoneNum: '',
     phoneCheck: ''
 })

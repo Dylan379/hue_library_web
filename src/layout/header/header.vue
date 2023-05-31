@@ -7,8 +7,8 @@
             </div>
             <div class="authBar">
                 <ul class="authNav">
-                    <!-- :src="userInfo.userAvatarUrl" -->
-                    <li v-if="loginStore.isLogin"><el-button plain circle color="black" size="large">
+                    <li v-if="loginStore.isLogin">
+                        <el-button plain circle color="black" size="large" @click="showUserInfoTab">
                             <el-avatar :src="userAvatarUrl" @error="errorHandler">
                                 <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
                             </el-avatar>
@@ -29,6 +29,8 @@ import { ref, reactive, watch, watchEffect, onMounted, onBeforeMount } from 'vue
 import myReserve from '../../components/basic/myReserve.vue';
 import router from '../../router';
 import { useAvailableSeatStore } from '../../stores/availableSeat'
+import usethrottle from '../../hooks/usethrottle'
+// import { useThrottle } from '@vueuse/core';
 import getUserInfo from '../../api/getUserInfo';
 import { useLoginStore } from '../../stores/login'
 import { useUserStore } from '../../stores/user';
@@ -36,6 +38,24 @@ import { storeToRefs } from 'pinia';
 const loginStore = useLoginStore();
 const userStore = useUserStore();
 const { userAvatarUrl } = storeToRefs(userStore)
+
+//打开用户数据面板
+const showUserInfoTab = () => {
+    if (!userStore.isShowUserInfo) {
+        userStore.updateIsShowUserInfo();
+        availableSeatStore.showAvailableSeatTab = false;
+        usethrottle(getUserInfo(), 5000);
+    } else {
+        userStore.updateIsShowUserInfo();
+        availableSeatStore.showAvailableSeatTab = false;
+    }
+}
+
+// const usethrottleShowUserInfoTab = usethrottle(showUserInfoTab, 5000)
+
+//5/27解决用户信息持久化问题
+
+
 const errorHandler = () => true
 //查找是否登录
 onMounted(() => {
@@ -49,9 +69,10 @@ const toLogin = () => {
     router.push('/login')
 }
 //还有座位吗
-const store = useAvailableSeatStore()
+const availableSeatStore = useAvailableSeatStore()
 const showTable = () => {
-    store.updateShowOtherTable();
+    availableSeatStore.updateShowOtherTable();
+    userStore.isShowUserInfo = false;
 }
 </script>
 <style scoped lang='less'>

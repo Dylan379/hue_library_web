@@ -4,7 +4,7 @@
             <div class="border-2 border-solid rounded-md border-gray-200 mx-20">
                 <div class='flex h-14 pl-4 py-4 pr-2 '>
                     <el-form-item label="账号" prop="userName">
-                        <el-input class='w-3/4  text-sm' placeholder="请输入账号" v-model="userRuleForm.userName" />
+                        <el-input class='w-3/4  text-sm' placeholder="请输入账号" v-model="userRuleForm.userStuId" />
                     </el-form-item>
                 </div>
                 <div class='h-0 w-full border-b-2 border-solid  border-gray-200'></div>
@@ -45,8 +45,8 @@ const userStore = useUserStore()
 
 
 
-let userRuleForm = reactive({
-    userName: '',
+const userRuleForm = reactive({
+    userStuId: '',
     userPwd: ''
 })
 
@@ -72,10 +72,9 @@ const rules = reactive<FormRules>({
 })
 
 //持续更新用户登陆数据
-onUpdated(() => {
-    userStore.changeUserInfo(userRuleForm.userName, userRuleForm.userPwd);
+watch(userRuleForm,()=>{
+    userStore.changeUserInfo(userRuleForm.userStuId, userRuleForm.userPwd);
 })
-
 //登录api
 const toLogin = pwdToLogin;
 //登录验证+防抖

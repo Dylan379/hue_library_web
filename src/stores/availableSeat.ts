@@ -9,7 +9,7 @@ export const useAvailableSeatStore = defineStore({
     id: 'availableSeat', // id必填，且需要唯一
     state: () => {
         return {
-            showOtherTable: false,
+            showAvailableSeatTab: false,
             availableSeatRequstBody: {
                 beginTime: "",
                 date: "",
@@ -25,7 +25,7 @@ export const useAvailableSeatStore = defineStore({
     },
     actions: {
         updateShowOtherTable() {
-            this.showOtherTable = !this.showOtherTable;
+            this.showAvailableSeatTab = !this.showAvailableSeatTab;
         },
         changeAvailableSeatRequstBody(availableSeatRequstBody: AvailableSeatRequstBody) {
             this.availableSeatRequstBody = availableSeatRequstBody;

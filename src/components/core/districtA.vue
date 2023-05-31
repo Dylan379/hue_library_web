@@ -1,8 +1,8 @@
 <template>
-    <div>A区</div>
-    <div class='flex'>
-        <div class="seat">
-            <div v-for="(table, index) in (orderedSeatData || '').slice(0, 8)" :key="index">
+        <div class="text-xl mb-4 ml-96">A区</div>
+        <div class='flex'>
+            <div class="seat">
+                <div v-for="(table, index) in (orderedSeatData || '').slice(0, 8)" :key="index">
                 <div class='flex'>
                     <div v-for="(item, index1) in (table || '').slice(0, 4)" :key="index1">
                         <el-icon @click="showSeatDetail(index + 1, index1 + 1); orderSeat = !orderSeat" class='mr-2'

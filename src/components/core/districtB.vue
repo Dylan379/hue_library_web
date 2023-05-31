@@ -1,5 +1,6 @@
 <template>
-    <div>B区</div>
+    <div>
+        <div class="text-xl mb-4 ml-96">B区</div>
     <div class='flex'>
         <div class="seat">
             <div v-for="(table, index) in (orderedSeatData || '').slice(0, 11)" :key="index">
@@ -53,7 +54,7 @@
         <el-drawer ref="drawerRef" v-model="orderSeat" title="欢迎预约该座位!" direction="rtl" class="demo-drawer">
             <orderSeatVue></orderSeatVue>
         </el-drawer>
-    </div>
+    </div></div>
 </template>
 
 <script setup lang='ts'>

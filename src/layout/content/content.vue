@@ -20,24 +20,41 @@
       <div>
         <RouterView name="login"></RouterView>
       </div>
-      <div v-if="showOtherTable" class='otherSeat'>
+      <div v-if="showAvailableSeatTab" class='availableSeatTab'>
         <availableSeat></availableSeat>
+      </div>
+      <div v-if="showUserInfoTab" class='userInfoTab'>
+        <userInfoTab></userInfoTab>
       </div>
     </div>
   </el-main>
 </template>
 <script setup lang='ts'>
-import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed, shallowRef, toRaw, onUpdated } from 'vue';
-// import floor from '../../components/basic/floor.vue';
-// import floorArea from '../../components/basic/floorArea.vue';
+import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed, shallowRef, toRaw, onUpdated, watch } from 'vue';
 import choseFloor from '../../components/core/choseFloor.vue';
 import choseSeat from '../../components/core/choseSeat.vue'
 import availableSeat from '../../components/core/availableSeat.vue';
 import attention from '../../components/basic/attention.vue';
 import seatColorMean from '../../components/basic/seatColorMean.vue';
+import userInfoTab from '../../components/core/userInfoTab.vue';
 import { useAvailableSeatStore } from '../../stores/availableSeat'
-const store = useAvailableSeatStore()
-const showOtherTable = computed(() => store.showOtherTable)
+import { useUserStore } from '../../stores/user';
+import { storeToRefs } from 'pinia';
+const availableSeatstore = useAvailableSeatStore()
+const userStore = useUserStore();
+const { userInfo, isShowUserInfo } = storeToRefs(userStore);
+const showAvailableSeatTab = computed(() => availableSeatstore.showAvailableSeatTab)
+const showUserInfoTab = ref()
+
+watch([userInfo, isShowUserInfo], () => {
+  if (isShowUserInfo.value && userInfo.value) {
+    showUserInfoTab.value = isShowUserInfo;
+  } else {
+    showUserInfoTab.value = false;
+  }
+})
+
+
 </script>
 <style scoped lang='less'>
 .content {
@@ -50,12 +67,16 @@ const showOtherTable = computed(() => store.showOtherTable)
     display: table-column;
 
     .seatColorMean {
-      position: fixed;
-      top: 11.5vh;
+      margin-top: 20px;
+    }
+    .choseFloor{
+      // position: fixed;
+      margin-top:40px;
     }
 
     .attention {
-      margin-top: 50px;
+      // position: fixed;
+      margin-top:60px;
     }
   }
 
@@ -64,11 +85,21 @@ const showOtherTable = computed(() => store.showOtherTable)
     margin: 20px 0 0 11vw;
     width: 59vw;
     border-radius: 10px;
-    background-color: aliceblue;
+    // background-color: aliceblue;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.215);
   }
 
-  .otherSeat {
+  .availableSeatTab {
+    position: fixed;
+    left: 72vw;
+    margin: 20px 0 0 25px;
+    height: 86vh;
+    width: 25vw;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.215);
+  }
+
+  .userInfoTab {
     position: fixed;
     left: 72vw;
     margin: 20px 0 0 25px;

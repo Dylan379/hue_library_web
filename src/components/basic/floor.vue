@@ -45,7 +45,6 @@ const change = (e: Event) => {
 .floor {
     display: flex;
     flex-direction: column;
-    margin-top: 19vh;
     width: 40px;
     z-index: 1;
 

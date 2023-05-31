@@ -6,7 +6,7 @@ module.exports = {
     fontSize: {
       sm: ['14px', '14px'],
       base: ['16px', '24px'],
-      lg: ['20px', '28px'],
+      lg: ['18px', '20px'],
       xl: ['24px', '32px'],
     },
     boxShadow: {
