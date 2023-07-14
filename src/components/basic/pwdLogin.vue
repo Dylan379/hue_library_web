@@ -42,9 +42,6 @@ const isRegist = () => {
 const ruleFormRef = ref<FormInstance>()
 const userStore = useUserStore()
 
-
-
-
 const userRuleForm = reactive({
     userStuId: '',
     userPwd: ''
@@ -72,7 +69,7 @@ const rules = reactive<FormRules>({
 })
 
 //持续更新用户登陆数据
-watch(userRuleForm,()=>{
+watch(userRuleForm, () => {
     userStore.changeUserInfo(userRuleForm.userStuId, userRuleForm.userPwd);
 })
 //登录api

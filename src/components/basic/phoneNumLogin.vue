@@ -52,7 +52,7 @@ const rules = reactive<FormRules>({
 const toLogin = captchaToLogin;
 //登录防抖
 const updateDataToLogin = () => {
-    userStore.changePhoneNum(phoneRuleForm.phoneNum, parseInt(phoneRuleForm.phoneCheck));
+    userStore.changePhoneNum(phoneRuleForm.phoneNum, phoneRuleForm.phoneCheck);
     toLogin();
 }
 const useDebounceToLogin = useDebounce(updateDataToLogin, 1500, false)
@@ -95,6 +95,8 @@ watch(phoneRuleForm, () => {
         checkBtn.style.color = "#c9ccd0"
     }
 })
+
+
 const getCheckCode = (e: Event) => {
     //点击获取验证码时,解除禁用验证码输入框
     const checkPhone = e.target as HTMLButtonElement;
